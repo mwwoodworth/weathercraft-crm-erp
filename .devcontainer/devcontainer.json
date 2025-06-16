@@ -1,0 +1,38 @@
+{
+  "name": "Weathercraft Fullstack Monorepo",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "frontend",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "editor.formatOnSave": true,
+    "eslint.enable": true,
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black"
+  },
+  "extensions": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-azuretools.vscode-docker",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "streetsidesoftware.code-spell-checker",
+    "ms-vsliveshare.vsliveshare",
+    "github.copilot",
+    "msjsdiag.vscode-react-native",
+    "GraphQL.vscode-graphql"
+  ],
+  "postCreateCommand": "pip install --upgrade pip && pip install -r services/requirements.txt && npm install --prefix frontend",
+  "portsAttributes": {
+    "3000": { "label": "Next.js Frontend", "onAutoForward": "openBrowser" },
+    "8000": { "label": "FastAPI Backend", "onAutoForward": "openBrowser" },
+    "5432": { "label": "Postgres Database" },
+    "6379": { "label": "Redis" }
+  },
+  "forwardPorts": [3000, 8000, 5432, 6379],
+  "remoteUser": "vscode"
+}
