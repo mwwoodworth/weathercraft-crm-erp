@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+SQLAlchemy==2.0.30
+asyncpg
+alembic
+pydantic
+pytest
+pytest-asyncio
+httpx
+python-dotenv
+redis
+celery
+sentry-sdk
