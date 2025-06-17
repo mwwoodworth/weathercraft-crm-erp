@@ -16,16 +16,15 @@ jobs:
           POSTGRES_USER: weathercraft
           POSTGRES_PASSWORD: weathercraft
           POSTGRES_DB: weathercraft
-        ports:
-          - 5432:5432
+        ports: ["5432:5432"]
         options: >-
-          --health-cmd="pg_isready -U weathercraft" --health-interval=10s --health-timeout=5s --health-retries=5
+          --health-cmd "pg_isready -U weathercraft" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-            python-version: '3.11'
+          python-version: '3.11'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -39,15 +38,17 @@ jobs:
       - uses: actions/checkout@v4
       - name: Use Node.js 20
         uses: actions/setup-node@v4
-        with:  
-              node-version: '0'
-              
+        with:
+          node-version: '20'
+          cache: 'npm'
       - name: Install dependencies
-        working-directory: frontend
-        run: npm install
+        run: |
+          cd frontend
+          npm ci
       - name: Lint
-        working-directory: frontend
-        run: npm run lint
+        run: |
+          cd frontend
+          npm run lint
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
